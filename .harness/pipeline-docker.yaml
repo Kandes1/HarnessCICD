@@ -31,7 +31,7 @@ pipeline:
         ##############################################
         # CHANGE THIS: Your GitHub connector
         ############################################
-        connectorRef: project.Github
+        connectorRef: account.Github
         ###############################################
         # CHANGE THIS: Your repo name
         ###############################################
@@ -62,7 +62,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       echo "=== Step 1: Installing Dependencies ==="
-                      cd Episode-02/python-project
+                      cd HarnessCICD
                       pip install -r requirements.txt
                       echo "=== Dependencies Installed! ==="
 
@@ -75,7 +75,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       echo "=== Step 2: Running Unit Tests ==="
-                      cd Episode-02/python-project
+                      cd HarnessCICD
                       pip install -r requirements.txt
                       pytest test_app.py -v
                       echo "=== All 3 Tests Passed! ==="
@@ -89,7 +89,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       echo "=== Step 3: Verifying App Works ==="
-                      cd Episode-02/python-project
+                     cd HarnessCICD
                       pip install -r requirements.txt
                       python -c "from app import app; client = app.test_client(); r = client.get('/'); print(r.get_json()); r = client.get('/health'); print(r.get_json()); print('=== App Verified! ===')"
 
@@ -108,8 +108,8 @@ pipeline:
                     tags:
                       - <+pipeline.sequenceId>
                       - latest
-                    dockerfile: Episode-02/python-project/Dockerfile
-                    context: Episode-02/python-project
+                    dockerfile: cd HarnessCICD/Dockerfile
+                    context: HarnessCICD
 
               # Step 5: Verify success
               - step:
